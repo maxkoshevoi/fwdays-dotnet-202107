@@ -1,9 +1,5 @@
 ﻿using Autobarn.Data.Entities;
 using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Autobarn.Website.GraphQL.GraphTypes
 {
