@@ -3,6 +3,7 @@ using Autobarn.Data.Entities;
 using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,26 +18,34 @@ namespace Autobarn.Website.Controllers.api {
 			this.db = db;
 		}
 
+		private dynamic Paginate(string url, int index, int count, int total)
+        {
+			dynamic links = new ExpandoObject();
+			links.self = new { href = $"{url}?page={index}&size={count}" };
+			if (index < total)
+            {
+				links.next = new { href = $"{url}?page={index + count}&size={count}" };
+			}
+            if (index > 0)
+            {
+				links.previous = new { href = $"{url}?page={index - count}&size={count}" };
+			}
+			return links;
+		}
+
 		// GET: api/vehicles
 		[HttpGet]
 		[Produces("application/hal+json")]
-		public object Get(int page = 0, int size = 10) {
-			var items = db.ListVehicles().Skip(page * size).Take(size);
+		public object Get(int index = 0, int count = 10) {
+			var items = db.ListVehicles().Skip(index).Take(count);
+
+			var _links = Paginate("/api/vehicles", index, count, db.CountVehicles());
 			var result = new
 			{
-				_links = new
-                {
-					self = new
-                    {
-						href = "/api/vehicles"
-					},
-					next = new
-                    {
-						href = $"/api/vehicles?page={page+1}&size={size}"
-					}
-                },
-				items = items
+				_links,
+				items
 			};
+
 			return result;
 		}
 
