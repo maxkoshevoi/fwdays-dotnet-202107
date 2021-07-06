@@ -3,6 +3,7 @@ using Autobarn.Data.Entities;
 using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,8 +19,25 @@ namespace Autobarn.Website.Controllers.api {
 
 		// GET: api/vehicles
 		[HttpGet]
-		public IEnumerable<Vehicle> Get() {
-			return db.ListVehicles();
+		[Produces("application/hal+json")]
+		public object Get(int page = 0, int size = 10) {
+			var items = db.ListVehicles().Skip(page * size).Take(size);
+			var result = new
+			{
+				_links = new
+                {
+					self = new
+                    {
+						href = "/api/vehicles"
+					},
+					next = new
+                    {
+						href = $"/api/vehicles?page={page+1}&size={size}"
+					}
+                },
+				items = items
+			};
+			return result;
 		}
 
 		// GET api/vehicles/ABC123
