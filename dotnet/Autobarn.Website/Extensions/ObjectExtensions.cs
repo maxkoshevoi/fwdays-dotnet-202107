@@ -15,21 +15,19 @@ namespace Autobarn.Website.Extensions
             var properties = TypeDescriptor.GetProperties(value.GetType());
             foreach (PropertyDescriptor prop in properties)
             {
-                if (Ignore(prop))
-                {
-                    continue;
-                }
-
-                expando.Add(prop.Name.ToLower(), prop.GetValue(value));
+                expando.Add(prop.Name, prop.GetValue(value));
             }
             return (ExpandoObject)expando;
-
-            static bool Ignore(PropertyDescriptor prop) => prop.Attributes.OfType<JsonIgnoreAttribute>().Any();
         }
 
         public static dynamic ToResource(this Vehicle vehicle)
         {
             var resource = vehicle.ToDynamic();
+            
+            // Ignore stuff
+            ((IDictionary<string, object>)resource).Remove(nameof(Vehicle.VehicleModel));
+
+            // Enrich
             resource._links = new
             {
                 self = new { href = $"/api/vehicles/{vehicle.Registration}" },
