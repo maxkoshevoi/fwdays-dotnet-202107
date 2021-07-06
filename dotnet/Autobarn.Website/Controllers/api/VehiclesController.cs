@@ -1,5 +1,6 @@
 ﻿using Autobarn.Data;
 using Autobarn.Data.Entities;
+using Autobarn.Website.Extensions;
 using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Autobarn.Website.Controllers.api {
 		[HttpGet]
 		[Produces("application/hal+json")]
 		public object Get(int index = 0, int count = 10) {
-			var items = db.ListVehicles().Skip(index).Take(count);
+			var items = db.ListVehicles().Skip(index).Take(count).Select(v => v.ToResource());
 
 			var _links = Paginate("/api/vehicles", index, count, db.CountVehicles());
 			var result = new
