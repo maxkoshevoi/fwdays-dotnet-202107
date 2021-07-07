@@ -11,12 +11,12 @@ namespace Subscriber {
             var SUBSCRIBER = $"dylan@{Environment.MachineName}";
             var bus = RabbitHutch.CreateBus(AMQP);
             await bus.PubSub.SubscribeAsync<string>(SUBSCRIBER, s => Console.WriteLine(s));
-            await bus.PubSub.SubscribeAsync<ExampleMessage>(SUBSCRIBER, HandleExampleMessage);
+            await bus.PubSub.SubscribeAsync<VehicleAddedMessage>(SUBSCRIBER, HandleExampleMessage);
             Console.WriteLine("Subscribed to <string> messages.");
             Console.ReadKey(true);		
 		}
 
-        static void HandleExampleMessage(ExampleMessage message) {            
+        static void HandleExampleMessage(VehicleAddedMessage message) {            
             Console.WriteLine(new String('-', 72));
             Console.WriteLine(message.MessageBody);
             Console.WriteLine($"Created at {message.MessageSent} on {message.MachineName}");

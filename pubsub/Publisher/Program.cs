@@ -14,7 +14,7 @@ namespace Publisher {
 				var message = Console.ReadLine();
 
 				if (c % 2 == 0) {
-					var em = new ExampleMessage {
+					var em = new VehicleAddedMessage {
 						MachineName = Environment.MachineName,
 						MessageBody = message,
 						MessageSent = DateTimeOffset.UtcNow,

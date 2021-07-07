@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Messages\Messages.csproj" />
+    <ProjectReference Include="..\Messages\Autobarn.Messages.csproj" />
   </ItemGroup>
 
 </Project>

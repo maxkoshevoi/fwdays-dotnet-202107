@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "..\pubsub\Sub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publisher", "..\pubsub\Publisher\Publisher.csproj", "{D8D83B48-FD13-4CFC-92C4-2C2431063AAB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages", "..\pubsub\Messages\Messages.csproj", "{080F2B3A-2633-4791-A5B1-4B7EAB2CE52C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Messages", "..\pubsub\Messages\Autobarn.Messages.csproj", "{080F2B3A-2633-4791-A5B1-4B7EAB2CE52C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

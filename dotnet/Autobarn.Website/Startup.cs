@@ -1,5 +1,6 @@
 using Autobarn.Data;
 using Autobarn.Website.GraphQL.Schemas;
+using EasyNetQ;
 using GraphiQl;
 using GraphQL.Server;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,7 @@ namespace Autobarn.Website {
 					services.AddSingleton<IAutobarnDatabase, AutobarnCsvFileDatabase>();
 					break;
 			}
+			services.AddSingleton(RabbitHutch.CreateBus(Configuration.GetConnectionString("AutobarnAmqp")));
 			services.AddScoped<AutobarnSchema>();
 			services.AddGraphQL(options => options.EnableMetrics = false)
 				.AddNewtonsoftJson();
