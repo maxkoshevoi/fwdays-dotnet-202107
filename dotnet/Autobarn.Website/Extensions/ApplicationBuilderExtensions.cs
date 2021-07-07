@@ -46,6 +46,14 @@ namespace Autobarn.Website.Extensions
 						propertiesToRemove.ForEach(p => item.Remove(p));
 					}
                 }
+                else if (fullModelJson is JObject item)
+                {
+					List<string> allProperties = item.Properties().Select(p => p.Name.ToLower()).ToList();
+					List<string> propertiesToRemove = allProperties.Except(neededProperties).ToList();
+
+					propertiesToRemove.ForEach(p => item.Remove(p));
+					fullModelJson = item;
+				}
 
 				return fullModelJson.ToString();
 			}
