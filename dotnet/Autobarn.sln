@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Data", "Autobarn.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Website.Tests", "Autobarn.Website.Tests\Autobarn.Website.Tests.csproj", "{39C4F7B7-43D1-493F-97EE-E7C57D6C7F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subscriber", "Subscriber\Subscriber.csproj", "{2E218EA9-1DFA-4471-82BE-3C56FACDA6C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "Subscriber\Subscriber.csproj", "{2E218EA9-1DFA-4471-82BE-3C56FACDA6C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PubSub", "PubSub", "{7FFD2F56-0BB2-4844-BDDD-1048D6CBE98B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{60CDD254-E8BE-4B07-B391-6514F1A315ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{93314B43-703E-4ECE-9B10-685A6D9ED28F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +78,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BA806410-F779-461A-B4F1-D97D7289FB5B} = {60CDD254-E8BE-4B07-B391-6514F1A315ED}
+		{8B6C8131-EBC3-4DE2-8CE6-707484BA1BAE} = {93314B43-703E-4ECE-9B10-685A6D9ED28F}
+		{39C4F7B7-43D1-493F-97EE-E7C57D6C7F07} = {60CDD254-E8BE-4B07-B391-6514F1A315ED}
+		{2E218EA9-1DFA-4471-82BE-3C56FACDA6C3} = {7FFD2F56-0BB2-4844-BDDD-1048D6CBE98B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {814780BF-5A46-426C-B53C-35F53BBBD9D3}
