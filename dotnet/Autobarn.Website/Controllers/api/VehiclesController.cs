@@ -47,7 +47,7 @@ namespace Autobarn.Website.Controllers.api {
 				items
 			};
 
-			return result;
+			return items;
 		}
 
 		// GET api/vehicles/ABC123

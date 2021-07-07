@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -21,13 +24,32 @@ namespace Autobarn.Website.Extensions
                     return;
                 }
 
-                await ModifyResponseBody(context.Response, next, oldResponse => RemoveProperties(oldResponse, responseSchema));
+                await ModifyResponseBody(context.Response, next, oldResponse => RemoveNonSchemaProperties(oldResponse, responseSchema));
             });
 
-			static string RemoveProperties(string fullModel, string requestedSchema)
+			static string RemoveNonSchemaProperties(string fullModel, string schema)
             {
-				return "Hello";
-            }
+				JToken fullModelJson = JToken.Parse(fullModel);
+				
+				JObject schemaJson = JObject.Parse(schema);
+				List<string> neededProperties = schemaJson.Properties().Select(p => p.Name.ToLower()).ToList();
+
+				if (fullModelJson is JArray array)
+                {
+					
+					var f = array.FirstOrDefault() as JObject;
+					List<string> allProperties = f?.Properties().Select(p => p.Name.ToLower()).ToList();
+
+                    List<string> propertiesToRemove = allProperties.Except(neededProperties).ToList();
+
+					foreach (JObject item in array)
+                    {
+						propertiesToRemove.ForEach(p => item.Remove(p));
+					}
+                }
+
+				return fullModelJson.ToString();
+			}
 
 			static async Task ModifyResponseBody(HttpResponse response, Func<Task> next, Func<string, string> modifier)
 			{
