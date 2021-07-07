@@ -34,11 +34,10 @@ namespace Autobarn.Website.Extensions
 				JObject schemaJson = JObject.Parse(schema);
 				List<string> neededProperties = schemaJson.Properties().Select(p => p.Name.ToLower()).ToList();
 
-				if (fullModelJson is JArray array)
+				if (fullModelJson is JArray array && array.Any())
                 {
-					
-					var f = array.FirstOrDefault() as JObject;
-					List<string> allProperties = f?.Properties().Select(p => p.Name.ToLower()).ToList();
+					var firstItem = array.First() as JObject;
+					List<string> allProperties = firstItem.Properties().Select(p => p.Name.ToLower()).ToList();
 
                     List<string> propertiesToRemove = allProperties.Except(neededProperties).ToList();
 
