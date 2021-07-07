@@ -2,17 +2,17 @@
 using Autobarn.Data.Entities;
 using Autobarn.Website.Models;
 using EasyNetQ;
-using Messages;
+using Autobarn.Messages;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Autobarn.Website.Controllers.api {
-	[Route("api/[controller]")]
+namespace Autobarn.Website.Controllers.api
+{
+    [Route("api/[controller]")]
 	[ApiController]
 	public class VehiclesController : ControllerBase {
 		private readonly IAutobarnDatabase db;

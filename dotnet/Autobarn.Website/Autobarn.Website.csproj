@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\pubsub\Messages\Autobarn.Messages.csproj" />
+    <ProjectReference Include="..\..\pubsub\Autobarn.Messages\Autobarn.Messages.csproj" />
     <ProjectReference Include="..\Autobarn.Data\Autobarn.Data.csproj" />
   </ItemGroup>
 
