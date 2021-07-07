@@ -21,7 +21,7 @@ namespace Autobarn.Website.GraphQL.Queries
 				resolve: GetAllVehicles); 
 			
 			Field<VehicleGraphType>("Vehicle", "Query to retrieve a specific Vehicle",
-				 new QueryArguments(MakeNonNullStringArgument("registration", "The registration (licence plate) of the Vehicle")),
+				 new QueryArguments(MakeNonNullStringArgument("registration", "The registration (license plate) of the Vehicle")),
 				 resolve: GetVehicle);
 
 			Field<ListGraphType<VehicleGraphType>>("VehiclesByColor", "Query to retrieve all Vehicles matching the specified color",
