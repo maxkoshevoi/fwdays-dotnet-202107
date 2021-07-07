@@ -30,15 +30,15 @@ namespace Autobarn.Website.Extensions
 			static string RemoveNonSchemaProperties(string fullModel, string schema)
             {
 				JToken fullModelJson = JToken.Parse(fullModel);
-				
-				JObject schemaJson = JObject.Parse(schema);
-				List<string> neededProperties = schemaJson.Properties().Select(p => p.Name.ToLower()).ToList();
+
+				JArray schemaJson = JArray.Parse(schema);
+				List<string> neededProperties = schemaJson.Select(p => ((JValue)p).Value.ToString().ToLower()).ToList();
 
 				if (fullModelJson is JArray array && array.Any())
                 {
 					var firstItem = array.First() as JObject;
-					List<string> allProperties = firstItem.Properties().Select(p => p.Name.ToLower()).ToList();
 
+					List<string> allProperties = firstItem.Properties().Select(p => p.Name.ToLower()).ToList();
                     List<string> propertiesToRemove = allProperties.Except(neededProperties).ToList();
 
 					foreach (JObject item in array)
